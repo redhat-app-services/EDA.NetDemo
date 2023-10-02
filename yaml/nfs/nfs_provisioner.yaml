@@ -1,0 +1,11 @@
+apiVersion: cache.jhouse.com/v1alpha1
+kind: NFSProvisioner
+metadata:
+  name: nfsprovisioner-sample
+  namespace: nfsprovisioner-operator
+spec:
+  nfsImageConfiguration:
+    image: 'k8s.gcr.io/sig-storage/nfs-provisioner:v3.0.1'
+    imagePullPolicy: IfNotPresent
+  scForNFS: nfs
+  hostPathDir: /home/core/nfs

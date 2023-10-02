@@ -1,0 +1,27 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: event-consumer
+  namespace: kafka-cons
+spec:
+  template:
+    spec:
+      containers:
+        - image: quay.io/QUAY_USER/eventconsumer:1.5
+          env:
+            - name: DB_CONN_STR
+              valueFrom:
+                configMapKeyRef:
+                  name: kafka-cons-conf
+                  key: DB_CONN_STR
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: kafka-cons-conf
+  namespace: kafka-cons
+data:
+  DB_CONN_STR: >-
+    Data Source=tcp:sqlserver.mssql.svc.cluster.local,1433;Initial Catalog=kafka_events;User ID=sa;Password=redHat2023!;Pooling=True
+
+
