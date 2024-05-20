@@ -1,0 +1,33 @@
+#Direct to service:
+#=================
+DOMAIN=apps-crc.testing
+#DOMAIN=apps.cluster-trc9t.trc9t.sandbox3159.opentlc.com
+
+curl http://kafka-prod-kafka-prod.${DOMAIN}/api/kafka -X POST -d 'message={
+        "specversion": "1.0",
+        "type": "com.mycompany.myapp.myservice.myevent",
+        "source": "myservice/mysource",
+        "id": "1234-5678",
+        "time": "2023-01-02T12:34:56.789Z",
+        "subject": "my-important-subject",
+        "datacontenttype": "application/json",
+        "extensionattr1" : "value",
+        "extensionattr2" : 5,
+        "data": {
+          "message": "Hello",
+          "foo": "bar"
+        }
+      }'
+
+
+#3Scale:
+#======
+curl -k "https://3scale-api-3scale-apicast-production.apps-crc.testing:443" -X POST -H 'user_key: 2962bacca4b4bfa60a83019c8f21e328'  -d 'message=
+{
+"source": "curl",
+"id": "1234-5678",
+"subject": "demo",
+"message": "HelloWorld"
+}'
+
+

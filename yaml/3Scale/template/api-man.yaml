@@ -1,0 +1,29 @@
+apiVersion: apps.3scale.net/v1alpha1
+kind: APIManager
+metadata:
+  name: apimanager-demo
+spec:
+  system:
+    appSpec:
+      replicas: 1
+    sidekiqSpec:
+      replicas: 1
+  zync:
+    appSpec:
+      replicas: 1
+    queSpec:
+      replicas: 1
+  backend:
+    cronSpec:
+      replicas: 1
+    listenerSpec:
+      replicas: 1
+    workerSpec:
+      replicas: 1
+  apicast:
+    productionSpec:
+      replicas: 1
+    stagingSpec:
+      replicas: 1
+  wildcardDomain: apps.cluster-trc9t.trc9t.sandbox3159.opentlc.com
+  resourceRequirementsEnabled: false

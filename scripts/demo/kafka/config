@@ -1,0 +1,13 @@
+source ../../common_cfg
+
+CLUSTER_NAME="my-cluster"
+LISTENER_NAME=listener1
+NAMESPACE=amq-streams-kafka
+
+oc login ${OC_LOGIN_KUBEADMIN} > /dev/null
+
+# <cluster_name>-kafka-<listener_name>-bootstrap-<namespace>
+BOOTSTRAP_SERVER="$(oc get routes ${CLUSTER_NAME}-kafka-${LISTENER_NAME}-bootstrap -o=jsonpath='{.status.ingress[0].host}' -n ${NAMESPACE}):443"
+
+sed -i -e 's/^BOOTSTRAP=.*$/BOOTSTRAP='"${BOOTSTRAP_SERVER}"'/' ./consoleConsumer.sh
+sed -i -e 's/^BOOTSTRAP=.*$/BOOTSTRAP='"${BOOTSTRAP_SERVER}"'/' ./consoleProducer.sh

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quarkus-producer
+  namespace: quarkus-producer
+labels:
+  app: quarkus-producer
+  app.kubernetes.io/component: quarkus-producer
+  app.kubernetes.io/instance: quarkus-producer
+  app.kubernetes.io/name: quarkus-producer
+  app.kubernetes.io/part-of: quarkus-producer-app
+  app.openshift.io/runtime-namespace: kafka-quarkus-prod
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quarkus-producer
+  template:
+    metadata:
+      labels:
+        app: quarkus-producer
+    spec:
+      containers:
+      - name: quarkus-producer
+        image: quay.io/ajhajj/quarkus-prod:1.8
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: quarkus-producer
+spec:
+  selector:
+    app: quarkus-producer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

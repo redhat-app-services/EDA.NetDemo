@@ -1,0 +1,17 @@
+======================================================
+File: 
+amq-streams-2.6.0-bin.zip
+
+Download site:
+https://access.redhat.com/jbossnetwork/restricted/softwareDetail.html?softwareId=106110&product=jboss.amq.streams&version=2.6.0&downloadType=distributions
+======================================================
+
+
+======================================================
+File: 
+amq-streams-2.6.0-ocp-install-examples*.zip
+
+Download site:
+https://access.redhat.com/jbossnetwork/restricted/softwareDetail.html?softwareId=106108&product=jboss.amq.streams&version=2.6.0&downloadType=distributions
+======================================================
+

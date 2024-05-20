@@ -1,0 +1,56 @@
+#Direct to service:
+#=================
+DOMAIN=apps-crc.testing
+
+curl http://localhost:8080/api/kafka -X POST -d 'message={
+        "specversion": "1.0",
+        "type": "com.mycompany.myapp.myservice.myevent",
+        "source": "myservice/mysource",
+        "id": "1234-5678",
+        "time": "2023-01-02T12:34:56.789Z",
+        "subject": "my-important-subject",
+        "datacontenttype": "application/json",
+        "extensionattr1" : "value",
+        "extensionattr2" : 5,
+        "data": {
+          "message": "Hello",
+          "foo": "bar"
+        }
+      }'
+
+curl http://kafka-prod-kafka-prod.apps-crc.testing/api/kafka -X POST -d 'message={
+        "specversion": "1.0",
+        "type": "com.mycompany.myapp.myservice.myevent",
+        "source": "myservice/mysource",
+        "id": "1234-5678",
+        "time": "2024-03-01T12:34:56.789Z",
+        "subject": "demo event",
+        "datacontenttype": "application/json",
+        "extensionattr1" : ".NET",
+        "extensionattr2" : "c#",
+        "data": {
+          "message": "Hello World!!",
+          "foo": "bar"
+        }
+      }'
+
+curl http://quarkus-producer-quarkus-producer.apps-crc.testing/api/kafka -X POST \
+-d 'message=
+      {
+        "specversion": "1.0",
+        "type": "com.mycompany.myapp.myservice.myevent",
+        "source": "myservice/mysource",
+        "id": "1234-5678",
+        "time": "2024-03-01T12:34:56.789Z",
+        "subject": "demo event",
+        "datacontenttype": "application/json",
+        "extensionattr1" : "quarkus",
+        "extensionattr2" : 5,
+        "data": {
+          "message": "Hello World!!",
+          "foo": "bar"
+        }
+      }'
+oc login -u kubeadmin https://api.crc.testing:6443
+
+

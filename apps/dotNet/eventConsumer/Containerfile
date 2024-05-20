@@ -1,0 +1,21 @@
+FROM registry.access.redhat.com/ubi8/dotnet-70-runtime
+EXPOSE 8080
+
+# Create folder for app binary
+# and set access permissions
+RUN mkdir -p /opt/app-root/ && \
+    chgrp -R 0 /opt/app-root/ && \
+    chmod -R g=u /opt/app-root/
+
+# set folder as working directory
+WORKDIR /opt/app-root
+
+# Copy compiled binaries
+ADD bin/Release/net7.0/publish/ .
+
+# Set user for non-openshift environments
+USER 1001
+
+# Command to run app 
+CMD ["dotnet", "eventConsumer.dll"]
+
